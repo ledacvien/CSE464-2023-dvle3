@@ -4,14 +4,16 @@ import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class MyGraphTest {
-    private String filePath = "C:\\Users\\levie\\OneDrive\\Documents\\aFall2023\\CSE464\\Project1";
     private String inputPath = "src\\test\\java\\input.dot";
     private String outputText = "src\\test\\java\\output.txt";
+    private String outputGraphic = "src\\test\\java\\graphic.png";
+    private String outputDOT = "src\\test\\java\\output.dot";
     private String exptectFile1 = "src\\test\\java\\expected1.txt";
 
     private MyGraph graph;
@@ -49,39 +51,18 @@ public class MyGraphTest {
     }
 
     @Test
-    public void toStringTest()
-    {
+    public void feature4Test() throws IOException {
+        graph.parseGraph(inputPath);
+        graph.outputGraphic(outputGraphic, "PNG");
+        graph.outputDOTGraph(outputDOT);
 
-    }
+        File imgFile = new File(outputGraphic);
+        boolean result = imgFile.exists();
 
-    @Test
-    public void outputGraphTest()
-    {
+        File dotFile = new File(outputDOT);
+        result = result & dotFile.exists();
 
-    }
-
-    @Test
-    public void addNodeTest()
-    {
-
-    }
-
-    @Test
-    public void addEdgeTest()
-    {
-
-    }
-
-    @Test
-    public void outputDOTGraph()
-    {
-
-    }
-
-    @Test
-    public void outputGraphicTest()
-    {
-
+        Assert.assertEquals(result, true);
     }
 
     @After
