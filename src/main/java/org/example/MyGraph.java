@@ -65,7 +65,7 @@ public class MyGraph {
         String result = "Number of nodes: ";
         result += g.vertexSet().size() + "\n";
         for (String src : g.vertexSet()) {
-            result += src + " ";
+            result += src + "\n";
         }
         result += "\nNumber of edges: " + g.edgeSet().size() + "\n";
         for(DefaultEdge edge : g.edgeSet()) {
@@ -79,7 +79,7 @@ public class MyGraph {
     // Output to file
     public void outputGraph(String filepath) throws IOException {
         FileWriter myWriter = new FileWriter(filepath);
-        myWriter.write(g.toString());
+        myWriter.write(toString());
         myWriter.close();
     }
 
@@ -91,11 +91,15 @@ public class MyGraph {
     }
 
     // Add a list of nodes
-    public void addNodes(String[] label)
+    public boolean addNodes(String[] label)
     {
+        boolean flag = true;
         for (String s : label) {
-            addNode(s);
+            boolean t = addNode(s);
+            if (!t)
+                flag = false;
         }
+        return flag;
     }
 
     // Feature 3: Adding edges from the imported graph

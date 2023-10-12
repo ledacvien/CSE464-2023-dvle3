@@ -5,8 +5,7 @@ package org.example;
 public class Main {
     public static void main(String[] args) {
         MyGraph graph = new MyGraph();
-        String filepath = "C:\\Users\\levie\\OneDrive\\Documents\\aFall2023\\CSE464\\Project1\\input.dot";
-
+        String filepath = "src\\main\\java\\org\\example\\input.dot";
         graph.parseGraph(filepath);
         System.out.println(graph.toString());
     }
