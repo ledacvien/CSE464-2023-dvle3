@@ -41,7 +41,11 @@ public class MyGraphTest {
     @Test
     public void feature3Test()
     {
-
+        graph.parseGraph(inputPath);
+        String srcLabel = "b";
+        String dstLabel = "a";
+        boolean result = graph.addEdge(srcLabel, dstLabel);
+        Assert.assertEquals(result, true);
     }
 
     @Test

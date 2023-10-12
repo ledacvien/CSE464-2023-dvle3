@@ -8,5 +8,13 @@ public class Main {
         String filepath = "src\\main\\java\\org\\example\\input.dot";
         graph.parseGraph(filepath);
         System.out.println(graph.toString());
+
+        String srcLabel = "a";
+        String dstLabel = "h";
+        String[] nodelist = {"e", "f", "g", "h"};
+        boolean result = graph.addNodes(nodelist);
+        System.out.println(graph.toString());
+        result = graph.addEdge(srcLabel, dstLabel);
+        System.out.println(graph.toString());
     }
 }
