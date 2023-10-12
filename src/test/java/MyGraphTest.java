@@ -10,9 +10,9 @@ import java.nio.file.Paths;
 
 public class MyGraphTest {
     private String filePath = "C:\\Users\\levie\\OneDrive\\Documents\\aFall2023\\CSE464\\Project1";
-    private String inputPath = "input.dot";
-    private String outputText = "output.txt";
-    private String exptectFile1 = "expected1.txt";
+    private String inputPath = "src\\test\\java\\input.dot";
+    private String outputText = "src\\test\\java\\output.txt";
+    private String exptectFile1 = "src\\test\\java\\expected1.txt";
 
     private MyGraph graph;
     @Before
@@ -33,7 +33,9 @@ public class MyGraphTest {
     @Test
     public void feature2Test()
     {
-
+        String[] nodelist = {"e", "f", "g", "h"};
+        boolean result = graph.addNodes(nodelist);
+        Assert.assertEquals(result, true);
     }
 
     @Test
