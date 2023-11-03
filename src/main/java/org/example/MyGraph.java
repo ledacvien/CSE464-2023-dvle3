@@ -144,13 +144,15 @@ public class MyGraph {
 
     public boolean removeNodes(String[] label)
     {
-        boolean flag = true;
         for (String s : label) {
-            boolean t = removeNode(s);
-            if (!t)
-                flag = false;
+            if (!g.containsVertex(s))
+                return false;
         }
-        return flag;
+
+        for (String s : label) {
+            g.removeVertex(s);
+        }
+        return true;
     }
 
     public boolean removeEdge(String src, String dst)

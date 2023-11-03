@@ -20,6 +20,7 @@ public class MyGraphTest {
     @Before
     public void setUp()
     {
+        System.out.println("This is set up");
         graph = new MyGraph();
     }
 
@@ -65,7 +66,7 @@ public class MyGraphTest {
         Assert.assertEquals(result, true);
     }
 
-
+    // Test case: Node in Graph
     @Test
     public void removeNodeTest1()
     {
@@ -73,8 +74,13 @@ public class MyGraphTest {
         String rmNode = "c";
         boolean result = graph.removeNode(rmNode);
         Assert.assertEquals(result, true);
+
+        System.out.println("Remove Node Test Output: ");
+        System.out.println(graph.toString());
     }
 
+
+    // Test case: Node not in Graph
     @Test
     public void removeNodeTest2()
     {
@@ -82,27 +88,60 @@ public class MyGraphTest {
         String rmNode = "h";
         boolean result = graph.removeNode(rmNode);
         Assert.assertEquals(result, false);
+
+        System.out.println("Remove Node Test Output: ");
+        System.out.println(graph.toString());
     }
 
+    // Test case: remove Node List. All nodes exits
     @Test
-    public void removeNodeTest3()
+    public void removeNodesListTest1()
     {
         graph.parseGraph(inputPath);
         String[] rmNodes = {"a", "b", "c"};
         boolean result = graph.removeNodes(rmNodes);
         Assert.assertEquals(result, true);
+
+        System.out.println("Remove Node List Test Output: ");
+        System.out.println(graph.toString());
     }
 
+    // Test case: remove Node List. Some nodes not exits
     @Test
-    public void removeNodesTest()
+    public void removeNodesListTest2()
     {
-
+        graph.parseGraph(inputPath);
+        String[] rmNodes = {"f", "b", "c"};
+        boolean result = graph.removeNodes(rmNodes);
+        Assert.assertEquals(result, false);
     }
 
+    // Test case: remove Edge, edge exits
     @Test
-    public void removeEdgeTest()
+    public void removeEdgeTest1()
     {
+        graph.parseGraph(inputPath);
+        String src = "a";
+        String dst = "b";
+        boolean result = graph.removeEdge(src, dst);
+        Assert.assertEquals(result, true);
 
+        System.out.println("Remove Edge Test Output: ");
+        System.out.println(graph.toString());
+    }
+
+    // Test case: remove Edge, edge not exits
+    @Test
+    public void removeEdgeTest2()
+    {
+        graph.parseGraph(inputPath);
+        String src = "r";
+        String dst = "b";
+        boolean result = graph.removeEdge(src, dst);
+        Assert.assertEquals(result, false);
+
+        System.out.println("Remove Edge Test Output: ");
+        System.out.println(graph.toString());
     }
 
     @After
