@@ -136,4 +136,25 @@ public class MyGraph {
         imgFile.createNewFile();
         ImageIO.write(img, (format == null ? "PNG" : format), imgFile);
     }
+
+    public boolean removeNode(String label)
+    {
+        return g.removeVertex(label);
+    }
+
+    public boolean removeNodes(String[] label)
+    {
+        boolean flag = true;
+        for (String s : label) {
+            boolean t = removeNode(s);
+            if (!t)
+                flag = false;
+        }
+        return flag;
+    }
+
+    public boolean removeEdge(String src, String dst)
+    {
+        return g.removeEdge(src, dst) != null;
+    }
 }

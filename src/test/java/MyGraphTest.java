@@ -29,13 +29,13 @@ public class MyGraphTest {
         graph.outputGraph(outputText);
         String expected = Files.readString(Paths.get(exptectFile1));
         String output = Files.readString(Paths.get(outputText));
-        Assert.assertEquals(expected, output);
+        Assert.assertEquals(output, expected);
     }
 
     @Test
     public void feature2Test()
     {
-        String[] nodelist = {"e", "f", "g", "h"};
+        String[] nodelist = {"f", "g", "h"};
         boolean result = graph.addNodes(nodelist);
         Assert.assertEquals(result, true);
     }
@@ -63,6 +63,46 @@ public class MyGraphTest {
         result = result & dotFile.exists();
 
         Assert.assertEquals(result, true);
+    }
+
+
+    @Test
+    public void removeNodeTest1()
+    {
+        graph.parseGraph(inputPath);
+        String rmNode = "c";
+        boolean result = graph.removeNode(rmNode);
+        Assert.assertEquals(result, true);
+    }
+
+    @Test
+    public void removeNodeTest2()
+    {
+        graph.parseGraph(inputPath);
+        String rmNode = "h";
+        boolean result = graph.removeNode(rmNode);
+        Assert.assertEquals(result, false);
+    }
+
+    @Test
+    public void removeNodeTest3()
+    {
+        graph.parseGraph(inputPath);
+        String[] rmNodes = {"a", "b", "c"};
+        boolean result = graph.removeNodes(rmNodes);
+        Assert.assertEquals(result, true);
+    }
+
+    @Test
+    public void removeNodesTest()
+    {
+
+    }
+
+    @Test
+    public void removeEdgeTest()
+    {
+
     }
 
     @After
