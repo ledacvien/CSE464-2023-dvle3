@@ -161,6 +161,22 @@ public class MyGraph {
         return g.removeEdge(src, dst) != null;
     }
 
+    private void DFSTraversal(String src, String dst, Map<String, Boolean> visited, Map<String, String> parent)
+    {
+        visited.put(src, true);
+        if (src.equals(dst)) return;
+
+        for (DefaultEdge e : g.edgesOf(src))
+        {
+            String t = g.getEdgeTarget(e);
+            if (!visited.containsKey(t) || !visited.get(t))
+            {
+                parent.put(t, src);
+                DFSTraversal(t, dst, visited, parent);
+            }
+        }
+    }
+
 
 
 }
