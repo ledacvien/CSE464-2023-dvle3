@@ -1,9 +1,15 @@
-Number of nodes: 3
+Number of nodes: 5
 a
 b
 c
+d
+e
 
-Number of edges: 3
+Number of edges: 7
 a->b
 b->c
 c->a
+c->d
+b->d
+a->e
+e->d

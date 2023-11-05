@@ -13,6 +13,12 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <build>
+        <sourceDirectory>src/main/java/org/example</sourceDirectory>
+        <testSourceDirectory>src/test/java</testSourceDirectory>
+    </build>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>

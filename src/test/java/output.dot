@@ -2,7 +2,13 @@ strict digraph G {
   a;
   b;
   c;
+  d;
+  e;
   a -> b;
   b -> c;
   c -> a;
+  c -> d;
+  b -> d;
+  a -> e;
+  e -> d;
 }

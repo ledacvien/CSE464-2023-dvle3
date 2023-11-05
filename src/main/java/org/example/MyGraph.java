@@ -8,11 +8,12 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.Scanner;
+import java.util.*;
 
 import javax.imageio.ImageIO;
 
 import org.jgrapht.Graph;
+import org.jgrapht.alg.interfaces.VertexCoverAlgorithm;
 import org.jgrapht.ext.JGraphXAdapter;
 import org.jgrapht.graph.DefaultDirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
@@ -158,5 +159,63 @@ public class MyGraph {
     public boolean removeEdge(String src, String dst)
     {
         return g.removeEdge(src, dst) != null;
+    }
+
+
+    private void BFSTraveral(String src, String dst, Map<String, Boolean> visited, Map<String, String> parent)
+    {
+        Queue<String> queue = new LinkedList<String>();
+
+        visited.put(src, true);
+        queue.add(src);
+
+        while(!queue.isEmpty())
+        {
+            String node = queue.poll();
+
+            if (node.equals(dst)) return;
+
+            Set<DefaultEdge> edges = g.edgesOf(node);
+            for (DefaultEdge e : edges)
+            {
+                String t = g.getEdgeTarget(e);
+                if (!visited.get(t))
+                {
+                    visited.put(t, true);
+                    parent.put(t, g.getEdgeSource(e));
+                    queue.add(t);
+                }
+            }
+        }
+    }
+
+    private void DFSTraveral(String src, String dst, Map<String, Boolean> visited, Map<String, String> parent)
+    {
+        visited.put(src, true);
+        if (src.equals(dst)) return;
+
+        for (DefaultEdge e : g.edgesOf(src))
+        {
+            String t = g.getEdgeTarget(e);
+            if (!visited.containsKey(t) || !visited.get(t))
+            {
+                parent.put(t, src);
+                DFSTraveral(t, dst, visited, parent);
+            }
+        }
+    }
+
+
+    public Path GraphSearch(String src, String dst)
+    {
+        Set<String> vertexes = g.vertexSet();
+        Map<String, Boolean> visited = new HashMap<String, Boolean>();
+        Map<String, String> parent = new HashMap<String, String>();
+        for (String s : vertexes)
+        {
+            visited.put(s, false);
+        }
+
+        return null;
     }
 }
