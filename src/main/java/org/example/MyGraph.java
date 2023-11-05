@@ -187,7 +187,26 @@ public class MyGraph {
         }
     }
 
-    public Path GraphSearch(String src, String dst)
+    private void DFSTraversal(String src, String dst, Map<String, Boolean> visited, Map<String, String> parent)
+    {
+        visited.put(src, true);
+        if (src.equals(dst)) return;
+
+        for (DefaultEdge e : g.edgesOf(src))
+        {
+            String t = g.getEdgeTarget(e);
+            if (!visited.containsKey(t) || !visited.get(t))
+            {
+                parent.put(t, src);
+                DFSTraversal(t, dst, visited, parent);
+            }
+        }
+    }
+
+    enum Algorithm{
+        DFS, BFS
+    }
+    public Path GraphSearch(String src, String dst, Algorithm algo)
     {
         Set<String> vertexes = g.vertexSet();
         Map<String, Boolean> visited = new HashMap<String, Boolean>();
@@ -198,9 +217,11 @@ public class MyGraph {
             parent.put(s, null);
         }
 
-        BFSTraversal(src, dst, visited, parent);
-
-
+        if (algo == Algorithm.BFS)
+            BFSTraversal(src, dst, visited, parent);
+        else if (algo == Algorithm.DFS)
+            DFSTraversal(src, dst, visited, parent);
+        
         Path path = new Path();
         String v = dst;
         while (parent.get(v) != null && !parent.get(v).equals(src))
