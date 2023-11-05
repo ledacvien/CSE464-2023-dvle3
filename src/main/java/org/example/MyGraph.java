@@ -174,8 +174,7 @@ public class MyGraph {
 
             if (node.equals(dst)) return;
 
-            Set<DefaultEdge> edges = g.edgesOf(node);
-            for (DefaultEdge e : edges)
+            for (DefaultEdge e : g.edgesOf(node))
             {
                 String t = g.getEdgeTarget(e);
                 if (!visited.get(t))
