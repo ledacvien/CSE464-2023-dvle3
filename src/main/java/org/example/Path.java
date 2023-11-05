@@ -17,13 +17,13 @@ public class Path
 
     public String toString()
     {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         while (s.size() > 1)
         {
-            result += pop() + "->";
+            result.append(pop()).append("->");
         }
         // giving some change I guess??
-        result += pop();
-        return result;
+        result.append(pop());
+        return result.toString();
     }
 }
