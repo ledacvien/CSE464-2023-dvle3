@@ -10,11 +10,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class MyGraphTest {
-    private String inputPath = "src\test\java\input.dot";
-    private String outputText = "src\test\java\output.txt";
-    private String outputGraphic = "src\test\java\graphic.png";
-    private String outputDOT = "src\test\java\output.dot";
-    private String exptectFile1 = "src\test\java\expected1.txt";
+    private String inputPath = "src\\test\\java\\input.dot";
+    private String outputText = "src\\test\\java\\output.txt";
+    private String outputGraphic = "src\\test\\java\\graphic.png";
+    private String outputDOT = "src\\test\\java\\output.dot";
+    private String exptectFile1 = "src\\test\\java\\expected1.txt";
 
     private MyGraph graph;
     @Before
