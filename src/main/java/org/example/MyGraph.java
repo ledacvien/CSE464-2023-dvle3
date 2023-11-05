@@ -177,6 +177,34 @@ public class MyGraph {
         }
     }
 
+    public Path GraphSearch(String src, String dst)
+    {
+        Set<String> vertexes = g.vertexSet();
+        Map<String, Boolean> visited = new HashMap<String, Boolean>();
+        Map<String, String> parent = new HashMap<String, String>();
+        for (String s : vertexes)
+        {
+            visited.put(s, false);
+            parent.put(s, null);
+        }
 
+        DFSTraversal(src, dst, visited, parent);
+
+
+        Path path = new Path();
+        String v = dst;
+        while (parent.get(v) != null && !parent.get(v).equals(src))
+        {
+            path.add(v);
+            v = parent.get(v);
+        }
+
+        if (v.equals(src))
+        {
+            path.add(v);
+            return path;
+        }
+        return null;
+    }
 
 }
