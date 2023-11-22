@@ -170,16 +170,13 @@ public class MyGraph {
     private void BFSTraversal(String src, String dst, Map<String, Boolean> visited, Map<String, String> parent)
     {
         Queue<String> queue = new LinkedList<String>();
-
         visited.put(src, true);
         queue.add(src);
 
         while(!queue.isEmpty())
         {
             String node = queue.poll();
-
             if (node.equals(dst)) return;
-
             for (DefaultEdge e : g.edgesOf(node))
             {
                 String t = g.getEdgeTarget(e);
@@ -195,16 +192,23 @@ public class MyGraph {
 
     private void DFSTraversal(String src, String dst, Map<String, Boolean> visited, Map<String, String> parent)
     {
-        if (src.equals(dst)) return;
+        Stack<String> stack = new Stack<>();
+        stack.push(src);
 
-        for (DefaultEdge e : g.edgesOf(src))
+        while (!stack.empty())
         {
-            String t = g.getEdgeTarget(e);
-            if (!visited.get(t))
-            {
-                visited.put(src, true);
-                parent.put(t, src);
-                DFSTraversal(t, dst, visited, parent);
+            String node = stack.pop();
+            if (!visited.get(node)) {
+                visited.put(node, true);
+                if (node.equals(dst)) return;
+                for (DefaultEdge e : g.edgesOf(node)) {
+                    String t = g.getEdgeTarget(e);
+                    if (!visited.get(t)) {
+                        visited.put(t, true);
+                        parent.put(t, node);
+                        stack.push(t);
+                    }
+                }
             }
         }
     }
@@ -235,18 +239,16 @@ public class MyGraph {
     }
     public Path GraphSearch(String src, String dst, Algorithm algo)
     {
-        Set<String> vertexes = g.vertexSet();
-        Map<String, Boolean> visited = new HashMap<String, Boolean>();
-        Map<String, String> parent = new HashMap<String, String>();
-
-        init(vertexes, visited, parent);
+        GraphTraversalTemplate traversal;
 
         if (algo == Algorithm.BFS)
-            BFSTraversal(src, dst, visited, parent);
-        else if (algo == Algorithm.DFS)
-            DFSTraversal(src, dst, visited, parent);
+            traversal = new BFSTraversal();
+        else
+            traversal = new DFSTraversal();
 
-        Path path = traceBack(parent, src, dst);
+        traversal.init(g, src);
+        traversal.Traversal(g, src, dst);
+        Path path = traversal.traceBack(src, dst);
         return path;
     }
 }
