@@ -2,5 +2,8 @@ digraph {
 a -> b;
 b -> c;
 c -> a;
+c -> d;
+b -> d;
+a -> e;
+e -> d
 }
-

@@ -206,16 +206,21 @@ public class MyGraph {
     enum Algorithm{
         DFS, BFS
     }
+    public void init(Set<String> vertexes, Map<String, Boolean> visited, Map<String,String> parent)
+    {
+        for (String s : vertexes)
+        {
+            visited.put(s, false);
+            parent.put(s,null);
+        }
+    }
     public Path GraphSearch(String src, String dst, Algorithm algo)
     {
         Set<String> vertexes = g.vertexSet();
         Map<String, Boolean> visited = new HashMap<String, Boolean>();
         Map<String, String> parent = new HashMap<String, String>();
-        for (String s : vertexes)
-        {
-            visited.put(s, false);
-            parent.put(s, null);
-        }
+
+        init(vertexes, visited, parent);
 
         if (algo == Algorithm.BFS)
             BFSTraversal(src, dst, visited, parent);
@@ -224,7 +229,7 @@ public class MyGraph {
 
         Path path = new Path();
         String v = dst;
-        while (parent.get(v) != null && !parent.get(v).equals(src))
+        while (parent.get(v) != null && !v.equals(src))
         {
             path.add(v);
             v = parent.get(v);
