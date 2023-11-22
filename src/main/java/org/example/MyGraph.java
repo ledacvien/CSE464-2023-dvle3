@@ -214,6 +214,22 @@ public class MyGraph {
             parent.put(s,null);
         }
     }
+    public Path traceBack(Map<String,String> parent, String src, String dst)
+    {
+        Path path = new Path();
+        String v = dst;
+        while (parent.get(v) != null && !v.equals(src))
+        {
+            path.add(v);
+            v = parent.get(v);
+        }
+        if (v.equals(src))
+        {
+            path.add(v);
+            return path;
+        }
+        return null;
+    }
     public Path GraphSearch(String src, String dst, Algorithm algo)
     {
         Set<String> vertexes = g.vertexSet();
@@ -227,19 +243,7 @@ public class MyGraph {
         else if (algo == Algorithm.DFS)
             DFSTraversal(src, dst, visited, parent);
 
-        Path path = new Path();
-        String v = dst;
-        while (parent.get(v) != null && !v.equals(src))
-        {
-            path.add(v);
-            v = parent.get(v);
-        }
-
-        if (v.equals(src))
-        {
-            path.add(v);
-            return path;
-        }
-        return null;
+        Path path = traceBack(parent, src, dst);
+        return path;
     }
 }
