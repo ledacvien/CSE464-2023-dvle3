@@ -91,16 +91,22 @@ public class MyGraph {
         return g.addVertex(label);
     }
 
+    public boolean containsListNodes(String[] label)
+    {
+        for (String s : label)
+            if (!g.containsVertex(s))
+                return false;
+        return true;
+    }
     // Add a list of nodes
     public boolean addNodes(String[] label)
     {
-        boolean flag = true;
+        if (!containsListNodes(label))
+            return false;
         for (String s : label) {
-            boolean t = addNode(s);
-            if (!t)
-                flag = false;
+            addNode(s);
         }
-        return flag;
+        return true;
     }
 
     // Feature 3: Adding edges from the imported graph
@@ -195,7 +201,7 @@ public class MyGraph {
         for (DefaultEdge e : g.edgesOf(src))
         {
             String t = g.getEdgeTarget(e);
-            if (!visited.containsKey(t) || !visited.get(t))
+            if (!visited.get(t))
             {
                 parent.put(t, src);
                 DFSTraversal(t, dst, visited, parent);
