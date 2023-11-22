@@ -12,11 +12,11 @@ public class Main {
         String src = "a";
         String dst = "d";
 
-        Path path = graph.GraphSearch(src, dst, MyGraph.Algorithm.BFS);
+        Path path = graph.GraphSearch(src, dst, Algorithm.BFS);
         System.out.println("Path using BFS algo: ");
         System.out.println(path.toString());
 
-        path = graph.GraphSearch(src, dst, MyGraph.Algorithm.DFS);
+        path = graph.GraphSearch(src, dst, Algorithm.DFS);
         System.out.println("Path using DFS algo: ");
         System.out.println(path.toString());
     }

@@ -209,9 +209,6 @@ public class MyGraph {
         }
     }
 
-    enum Algorithm{
-        DFS, BFS
-    }
     public void init(Set<String> vertexes, Map<String, Boolean> visited, Map<String,String> parent)
     {
         for (String s : vertexes)
