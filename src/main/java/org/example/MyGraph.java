@@ -195,7 +195,6 @@ public class MyGraph {
 
     private void DFSTraversal(String src, String dst, Map<String, Boolean> visited, Map<String, String> parent)
     {
-        visited.put(src, true);
         if (src.equals(dst)) return;
 
         for (DefaultEdge e : g.edgesOf(src))
@@ -203,6 +202,7 @@ public class MyGraph {
             String t = g.getEdgeTarget(e);
             if (!visited.get(t))
             {
+                visited.put(src, true);
                 parent.put(t, src);
                 DFSTraversal(t, dst, visited, parent);
             }
