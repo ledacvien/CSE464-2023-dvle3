@@ -8,29 +8,23 @@ import java.util.Map;
 import java.util.Set;
 
 abstract class GraphTraversal {
-    Set<String> vertexes;
-    Map<String, Boolean> visited = new HashMap<String, Boolean>();
-    Map<String, String> parent = new HashMap<String, String>();
+    protected Set<String> vertexes;
+    protected Map<String, Boolean> visited = new HashMap<String, Boolean>();
+    protected Map<String, String> parent = new HashMap<String, String>();
 
     public void GraphSearch(Graph<String, DefaultEdge> G, String src, String dst)
     {
-        vertexes = G.vertexSet();
-        init();
-        onCurrentVertex();
-        fetchNextVertex();
-        onNextVertex();
+        init(G, src, dst);
+        String curr = src;
+        while (!reachDestination(curr, dst))
+        {
+            curr = fetchNextVertex(G, curr);
+            onNextVertex(curr);
+        }
     }
-//    public void init()
-//    {
-//        for (String s : vertexes)
-//        {
-//            visited.put(s, false);
-//            parent.put(s,null);
-//        }
-//    }
-    public abstract void init();
-    public abstract void onCurrentVertex();
-    public abstract String fetchNextVertex();
-    public abstract void onNextVertex();
 
+    public abstract void init(Graph<String, DefaultEdge> G, String src, String dst);
+    public abstract boolean reachDestination(String curr, String dst);
+    public abstract String fetchNextVertex(Graph<String, DefaultEdge> G, String curr);
+    public abstract void onNextVertex(String curr);
 }
