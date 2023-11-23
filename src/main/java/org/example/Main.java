@@ -10,7 +10,7 @@ public class Main {
 
 
         String src = "a";
-        String dst = "d";
+        String dst = "c";
 
         Path path = graph.GraphSearch(src, dst, Algorithm.BFS);
         System.out.println("Path using BFS algo: ");

@@ -36,7 +36,7 @@ public class MyGraphTest {
     @Test
     public void feature2Test()
     {
-        String[] nodelist = {"f", "g", "h"};
+        String[] nodelist = {"y", "t", "z"};
         boolean result = graph.addNodes(nodelist);
         Assert.assertEquals(result, true);
     }

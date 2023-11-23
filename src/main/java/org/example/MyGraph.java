@@ -91,17 +91,19 @@ public class MyGraph {
         return g.addVertex(label);
     }
 
-    public boolean containsListNodes(String[] label)
+    // Check if all nodes is not in the graph or not
+    public boolean duplicate(String[] label)
     {
         for (String s : label)
-            if (!g.containsVertex(s))
-                return false;
-        return true;
+            // if one vertex is in then there exist duplicate
+            if (g.containsVertex(s))
+                return true;
+        return false;
     }
     // Add a list of nodes
     public boolean addNodes(String[] label)
     {
-        if (!containsListNodes(label))
+        if (duplicate(label))
             return false;
         for (String s : label) {
             addNode(s);
@@ -149,9 +151,16 @@ public class MyGraph {
         return g.removeVertex(label);
     }
 
+    public boolean existNodes(String[] label)
+    {
+        for (String s : label)
+            if (!g.containsVertex(s))
+                return false;
+        return true;
+    }
     public boolean removeNodes(String[] label)
     {
-        if (!containsListNodes(label))
+        if (!existNodes(label))
             return false;
         for (String s : label) {
             g.removeVertex(s);
