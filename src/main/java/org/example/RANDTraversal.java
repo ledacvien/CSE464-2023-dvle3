@@ -9,6 +9,7 @@ public class RANDTraversal extends GraphTraversalTemplate{
     Random rand = new Random();
     @Override
     protected void Traversal(Graph<String, DefaultEdge> G, String src, String dst) {
+        System.out.println("visiting: " + src);
         visited.put(src, true);
         if (src.equals(dst)) return;
 
