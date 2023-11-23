@@ -179,6 +179,8 @@ public class MyGraph {
 
         if (algo == Algorithm.BFS)
             traversal = new BFSTraversal();
+        else if (algo == Algorithm.RANDOM)
+            traversal = new RANDTraversal();
         else
             traversal = new DFSTraversal();
 

@@ -13,21 +13,11 @@ public class RANDTraversal extends GraphTraversalTemplate{
         if (src.equals(dst)) return;
 
         int n = G.edgesOf(src).size();
-        int[] randed = new int[n];
+        boolean[] randed = new boolean[n];
         int count = 0;
         while(count < n)
         {
-            int idx = rand.nextInt(n);
-            while(randed[idx] == 0) idx = rand.nextInt(n);
-            randed[idx] = 1;
-            int i = 0;
-            DefaultEdge edge = null;
-            for (DefaultEdge e : G.edgesOf(src)){
-                edge = e;
-                if (i == idx) break;
-                i++;
-            }
-            String t = G.getEdgeTarget(edge);
+            String t = G.getEdgeTarget(randomEdge(G, src, randed, n));
             if (!visited.get(t))
             {
                 parent.put(t, src);
@@ -35,5 +25,20 @@ public class RANDTraversal extends GraphTraversalTemplate{
             }
             count++;
         }
+    }
+    private DefaultEdge randomEdge(Graph<String, DefaultEdge> G, String src, boolean[] randed, int n)
+    {
+        int idx = rand.nextInt(n);
+        while (randed[idx]) idx = rand.nextInt(n);
+        randed[idx] = true;
+
+        int i = 0;
+        for(DefaultEdge e : G.edgesOf(src))
+        {
+            if (i == idx)
+                return e;
+            i++;
+        }
+        return null;
     }
 }

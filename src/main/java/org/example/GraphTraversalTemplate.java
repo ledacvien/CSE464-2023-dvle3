@@ -41,6 +41,6 @@ abstract class GraphTraversalTemplate {
             path.add(v);
             return path;
         }
-        return null;
+        return new Path();
     }
 }

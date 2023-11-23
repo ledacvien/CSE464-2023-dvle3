@@ -19,5 +19,9 @@ public class Main {
         path = graph.GraphSearch(src, dst, Algorithm.DFS);
         System.out.println("Path using DFS algo: ");
         System.out.println(path.toString());
+
+        path = graph.GraphSearch(src, dst, Algorithm.RANDOM);
+        System.out.println("Path using RANDOM algo: ");
+        System.out.println(path.toString());
     }
 }

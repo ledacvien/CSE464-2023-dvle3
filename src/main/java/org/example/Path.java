@@ -17,6 +17,8 @@ public class Path
 
     public String toString()
     {
+        if (s.empty()) return "";
+
         StringBuilder result = new StringBuilder();
         while (s.size() > 1)
         {
