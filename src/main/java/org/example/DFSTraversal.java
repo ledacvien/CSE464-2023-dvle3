@@ -5,7 +5,7 @@ import org.jgrapht.graph.DefaultEdge;
 
 public class DFSTraversal extends GraphTraversalTemplate{
     @Override
-    public void Traversal(Graph<String, DefaultEdge> G, String src, String dst) {
+    protected void Traversal(Graph<String, DefaultEdge> G, String src, String dst) {
         visited.put(src, true);
         if (src.equals(dst)) return;
 

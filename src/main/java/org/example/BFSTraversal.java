@@ -10,7 +10,7 @@ public class BFSTraversal extends GraphTraversalTemplate{
     Queue<String> queue = new LinkedList<>();
 
     @Override
-    public void Traversal(Graph<String, DefaultEdge> G, String src, String dst) {
+    protected void Traversal(Graph<String, DefaultEdge> G, String src, String dst) {
         visited.put(src, true);
         queue.add(src);
         while(!queue.isEmpty())

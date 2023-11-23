@@ -173,9 +173,6 @@ public class MyGraph {
         else
             traversal = new DFSTraversal();
 
-        traversal.Init(g, src);
-        traversal.Traversal(g, src, dst);
-        Path path = traversal.TraceBack(src, dst);
-        return path;
+        return traversal.GraphSearch(g, src, dst);
     }
 }
