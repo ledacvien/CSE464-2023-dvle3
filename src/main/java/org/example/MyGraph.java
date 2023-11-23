@@ -151,11 +151,8 @@ public class MyGraph {
 
     public boolean removeNodes(String[] label)
     {
-        for (String s : label) {
-            if (!g.containsVertex(s))
-                return false;
-        }
-
+        if (!containsListNodes(label))
+            return false;
         for (String s : label) {
             g.removeVertex(s);
         }
@@ -167,76 +164,6 @@ public class MyGraph {
         return g.removeEdge(src, dst) != null;
     }
 
-    private void BFSTraversal(String src, String dst, Map<String, Boolean> visited, Map<String, String> parent)
-    {
-        Queue<String> queue = new LinkedList<String>();
-        visited.put(src, true);
-        queue.add(src);
-
-        while(!queue.isEmpty())
-        {
-            String node = queue.poll();
-            if (node.equals(dst)) return;
-            for (DefaultEdge e : g.edgesOf(node))
-            {
-                String t = g.getEdgeTarget(e);
-                if (!visited.get(t))
-                {
-                    visited.put(t, true);
-                    parent.put(t, g.getEdgeSource(e));
-                    queue.add(t);
-                }
-            }
-        }
-    }
-
-    private void DFSTraversal(String src, String dst, Map<String, Boolean> visited, Map<String, String> parent)
-    {
-        Stack<String> stack = new Stack<>();
-        stack.push(src);
-
-        while (!stack.empty())
-        {
-            String node = stack.pop();
-            if (!visited.get(node)) {
-                visited.put(node, true);
-                if (node.equals(dst)) return;
-                for (DefaultEdge e : g.edgesOf(node)) {
-                    String t = g.getEdgeTarget(e);
-                    if (!visited.get(t)) {
-                        visited.put(t, true);
-                        parent.put(t, node);
-                        stack.push(t);
-                    }
-                }
-            }
-        }
-    }
-
-    public void init(Set<String> vertexes, Map<String, Boolean> visited, Map<String,String> parent)
-    {
-        for (String s : vertexes)
-        {
-            visited.put(s, false);
-            parent.put(s,null);
-        }
-    }
-    public Path traceBack(Map<String,String> parent, String src, String dst)
-    {
-        Path path = new Path();
-        String v = dst;
-        while (parent.get(v) != null && !v.equals(src))
-        {
-            path.add(v);
-            v = parent.get(v);
-        }
-        if (v.equals(src))
-        {
-            path.add(v);
-            return path;
-        }
-        return null;
-    }
     public Path GraphSearch(String src, String dst, Algorithm algo)
     {
         GraphTraversalTemplate traversal;
@@ -246,9 +173,9 @@ public class MyGraph {
         else
             traversal = new DFSTraversal();
 
-        traversal.init(g, src);
+        traversal.Init(g, src);
         traversal.Traversal(g, src, dst);
-        Path path = traversal.traceBack(src, dst);
+        Path path = traversal.TraceBack(src, dst);
         return path;
     }
 }

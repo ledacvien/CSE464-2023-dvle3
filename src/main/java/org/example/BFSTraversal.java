@@ -8,16 +8,6 @@ import java.util.Queue;
 
 public class BFSTraversal extends GraphTraversalTemplate{
     Queue<String> queue = new LinkedList<>();
-    @Override
-    public void init(Graph<String, DefaultEdge> G, String src)
-    {
-        vertexes = G.vertexSet();
-        for (String s : vertexes)
-        {
-            visited.put(s, false);
-            parent.put(s,null);
-        }
-    }
 
     @Override
     public void Traversal(Graph<String, DefaultEdge> G, String src, String dst) {

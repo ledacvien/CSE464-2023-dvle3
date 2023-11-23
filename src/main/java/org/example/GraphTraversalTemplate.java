@@ -11,9 +11,17 @@ abstract class GraphTraversalTemplate {
     protected Set<String> vertexes;
     protected Map<String, Boolean> visited = new HashMap<String, Boolean>();
     protected Map<String, String> parent = new HashMap<String, String>();
-    public abstract void init(Graph<String, DefaultEdge> G, String src);
+    public void Init(Graph<String, DefaultEdge> G, String src)
+    {
+        vertexes = G.vertexSet();
+        for (String s : vertexes)
+        {
+            visited.put(s, false);
+            parent.put(s, null);
+        }
+    }
     public abstract void Traversal(Graph<String, DefaultEdge> G, String src, String dst);
-    public Path traceBack(String src, String dst)
+    public Path TraceBack(String src, String dst)
     {
         Path path = new Path();
         String v = dst;
