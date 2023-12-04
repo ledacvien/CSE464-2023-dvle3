@@ -175,15 +175,7 @@ public class MyGraph {
 
     public Path GraphSearch(String src, String dst, Algorithm algo)
     {
-        GraphTraversalTemplate traversal;
-
-        if (algo == Algorithm.BFS)
-            traversal = new BFSTraversal();
-        else if (algo == Algorithm.RANDOM)
-            traversal = new RANDTraversal();
-        else
-            traversal = new DFSTraversal();
-
-        return traversal.GraphSearch(g, src, dst);
+        GraphContext pathSearcher = new GraphContext(algo);
+        return pathSearcher.GraphSearch(g, src, dst);
     }
 }
