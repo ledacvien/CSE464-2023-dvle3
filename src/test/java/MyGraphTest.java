@@ -24,6 +24,7 @@ public class MyGraphTest {
         graph = new MyGraph();
     }
 
+    // Test for parsing the graph dot file
     @Test
     public void feature1Test() throws IOException {
         graph.parseGraph(inputPath);
@@ -33,14 +34,16 @@ public class MyGraphTest {
         Assert.assertEquals(output, expected);
     }
 
+    // Test feature adding nodes to graph
     @Test
     public void feature2Test()
     {
-        String[] nodelist = {"f", "g", "h"};
+        String[] nodelist = {"y", "t", "z"};
         boolean result = graph.addNodes(nodelist);
         Assert.assertEquals(result, true);
     }
 
+    // Test feature adding edge to graph
     @Test
     public void feature3Test()
     {
@@ -51,6 +54,7 @@ public class MyGraphTest {
         Assert.assertEquals(result, true);
     }
 
+    // Test feature exporting graph to dot file and image file
     @Test
     public void feature4Test() throws IOException {
         graph.parseGraph(inputPath);

@@ -91,16 +91,24 @@ public class MyGraph {
         return g.addVertex(label);
     }
 
+    // Check if all nodes is not in the graph or not
+    public boolean duplicate(String[] label)
+    {
+        for (String s : label)
+            // if one vertex is in then there exist duplicate
+            if (g.containsVertex(s))
+                return true;
+        return false;
+    }
     // Add a list of nodes
     public boolean addNodes(String[] label)
     {
-        boolean flag = true;
+        if (duplicate(label))
+            return false;
         for (String s : label) {
-            boolean t = addNode(s);
-            if (!t)
-                flag = false;
+            addNode(s);
         }
-        return flag;
+        return true;
     }
 
     // Feature 3: Adding edges from the imported graph
@@ -143,13 +151,17 @@ public class MyGraph {
         return g.removeVertex(label);
     }
 
-    public boolean removeNodes(String[] label)
+    public boolean existNodes(String[] label)
     {
-        for (String s : label) {
+        for (String s : label)
             if (!g.containsVertex(s))
                 return false;
-        }
-
+        return true;
+    }
+    public boolean removeNodes(String[] label)
+    {
+        if (!existNodes(label))
+            return false;
         for (String s : label) {
             g.removeVertex(s);
         }
@@ -161,80 +173,9 @@ public class MyGraph {
         return g.removeEdge(src, dst) != null;
     }
 
-    private void BFSTraversal(String src, String dst, Map<String, Boolean> visited, Map<String, String> parent)
-    {
-        Queue<String> queue = new LinkedList<String>();
-
-        visited.put(src, true);
-        queue.add(src);
-
-        while(!queue.isEmpty())
-        {
-            String node = queue.poll();
-
-            if (node.equals(dst)) return;
-
-            for (DefaultEdge e : g.edgesOf(node))
-            {
-                String t = g.getEdgeTarget(e);
-                if (!visited.get(t))
-                {
-                    visited.put(t, true);
-                    parent.put(t, g.getEdgeSource(e));
-                    queue.add(t);
-                }
-            }
-        }
-    }
-
-    private void DFSTraversal(String src, String dst, Map<String, Boolean> visited, Map<String, String> parent)
-    {
-        visited.put(src, true);
-        if (src.equals(dst)) return;
-
-        for (DefaultEdge e : g.edgesOf(src))
-        {
-            String t = g.getEdgeTarget(e);
-            if (!visited.containsKey(t) || !visited.get(t))
-            {
-                parent.put(t, src);
-                DFSTraversal(t, dst, visited, parent);
-            }
-        }
-    }
-
-    enum Algorithm{
-        DFS, BFS
-    }
     public Path GraphSearch(String src, String dst, Algorithm algo)
     {
-        Set<String> vertexes = g.vertexSet();
-        Map<String, Boolean> visited = new HashMap<String, Boolean>();
-        Map<String, String> parent = new HashMap<String, String>();
-        for (String s : vertexes)
-        {
-            visited.put(s, false);
-            parent.put(s, null);
-        }
-
-        if (algo == Algorithm.BFS)
-            BFSTraversal(src, dst, visited, parent);
-        else if (algo == Algorithm.DFS)
-            DFSTraversal(src, dst, visited, parent);
-
-        Path path = new Path();
-        String v = dst;
-        while (parent.get(v) != null && !parent.get(v).equals(src))
-        {
-            path.add(v);
-            v = parent.get(v);
-        }
-
-        if (v.equals(src))
-        {
-            path.add(v);
-            return path;
-        }
-        return null;
+        GraphContext pathSearcher = new GraphContext(algo);
+        return pathSearcher.GraphSearch(g, src, dst);
     }
 }
